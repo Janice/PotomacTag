@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Tagged Smallmouth</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js"></script>
+    <link
+      href="https://api.tiles.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      }
+      
+      #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+      }
+      
+      h1 {
+        font-size: 20px;
+        line-height: 30px;
+      }
+      
+      h2 {
+        font-size: 10px;
+        line-height: 12px;
+        margin-bottom: 2px;
+      }
+      label
+			{
+    		font-size: 10px;
+        line-height: 12px;
+        margin-bottom: 3px;
+			}
+      p {
+   			margin:0;
+  			padding:0;
+    		line-height:1.1;
+			}
+      
+      a {
+        text-decoration: none;
+        color: #2dc4b2;
+      }
+      img.maptype {
+  			width: 12%;
+			}
+			img.popup {
+				width: 50%;
+			}
+      
+      #console {
+        position: absolute;
+        width: 160px;
+        margin: 10px;
+        padding: 10px 20px;
+        background-color: white;
+      }
+      .session {
+			  margin-bottom: 20px;
+			}
+			
+			.ddown {
+				font-size: 10px;
+        line-height: 12px;
+			}
+
+			.row {
+			  height: 10px;
+			  width: 100%;
+			}
+       .colors {
+        background: linear-gradient(
+          to right,
+					#e4e6f0,
+					#b907f0,
+					#1ef7d7,
+					#1550b4,
+					#02fa02,
+					#FFFF00,
+					#FFA500,
+					#f71215
+        );
+  			margin-bottom: 10px;
+  			margin-top: 10px;
+  		}
+        
+        .label {
+ 				 width: 17%;
+  			display: inline-block;
+  			text-align: center;
+  			font-size: 10px;
+        line-height: 12px;
+			}
+
+			input[type="radio"] {
+				cursor: pointer;
+			  display: none;
+			  float: left;
+      	clear: none;
+      	margin: 2px 0 0 2px;
+			}
+			div.fixed {
+  			position: fixed;
+  			bottom: 20px;
+  			border: none;
+			} 
+
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <div id="console">
+    	
+  		<div class="session">
+  			<h2>Species</h2>
+  			<h2>Date and Time Captured</h2>
+  			<h2>Tag Color and ID</h2>  
+  			<h2>Conditions at: 
+  			<select class="ddown" name="gauge" id="gauge">
+  				<option class="ddown" value="LF">Little Falls</option></h2>
+				</select><br>
+				<h2>Data:
+				<select class="ddown" name="dataType" id="dataType">
+					<option value="temp">Water Temperature</option>
+					<option value="turbidity">Turbidity</option></h2>
+				</select><br>
+        <div class="row colors"></div>
+ 
+      </div>
+      <div class="session" id="sliderbar">
+  		<h2>Year: <label id="active-year">2024</label></h2>
+  			<input
+    			id="slider"
+    			class="row"
+    			type="range"
+    			min="2020"
+    			max="2024"
+    			step="1"
+    			value="2024"
+  			/>
+			</div>
+      
+		</div>
+		<div class="fixed" id="basemapmenu">
+			<label>
+			  <input id="outdoors-v12" type="radio" name="basemap" value="outdoor" checked>
+			  <img class="maptype" src="outdoors.png">
+			</label>
+			<label>
+			  <input id="light-v11" type="radio" name="basemap" value="light">
+			  <img class="maptype" src="light.png">
+			</label>
+			<label>
+			  <input id="dark-v11" type="radio" name="basemap" value="dark">
+			  <img class="maptype" src="dark.png">
+			</label>
+			
+			<label>
+			  <input id="satellite-v9" type="radio" name="basemap" value="sat">
+			  <img class="maptype" src="satellite.png">
+			</label>
+			<label>
+			  <input id="satellite-streets-v12" type="radio" name="basemap" value="street">
+			  <img class="maptype" src="streets.png">
+			</label>
+		</div>
+    <script>
+      // The value for 'accessToken' begins with 'pk...'
+      mapboxgl.accessToken = 'pk.eyJ1IjoiamFuaWNlIiwiYSI6ImJ0ak45VWcifQ.HJ5_ISkOo7TsTBA_51jsLQ';
+      const map = new mapboxgl.Map({
+        container: 'map',
+        // Replace YOUR_STYLE_URL with your style URL.
+        style: 'mapbox://styles/mapbox/light-v11',
+        center: [-77.436, 39.116],
+        zoom: 9
+      });
+      
+  /*    setTimeout(() => {
+  // Code to execute after 4 seconds
+  			console.log("This will run after 4 seconds");
+			}, 4000);  */
+      
+      
+      
+          	// Add GeoJSON source and layer
+			function addAdditionalLayer() {
+				
+				map.addLayer({
+            'id': 'clusters',
+            'type': 'circle',
+            'source': 'smallmouthSource',
+            filter: ['has', 'point_count'],
+            paint: {
+                // Use step expressions (https://docs.mapbox.com/style-spec/reference/expressions/#step)
+                // with three steps to implement three types of circles:
+                //   * Blue, 20px circles when point count is less than 100
+                //   * Yellow, 30px circles when point count is between 100 and 750
+                //   * Pink, 40px circles when point count is greater than or equal to 750
+                'circle-color': [
+                    'step',
+                    ['get', 'point_count'],
+                    '#51bbd6',
+                    50,
+                    '#f1f075',
+                    100,
+                    '#f28cb1'
+                ],
+                'circle-radius': [
+                    'step',
+                    ['get', 'point_count'],
+                    20,
+                    4,
+                    30,
+                    8,
+                    40
+                ]
+            }
+        });
+        map.addLayer({
+            id: 'cluster-count',
+            type: 'symbol',
+            source: 'smallmouthSource',
+            filter: ['has', 'point_count'],
+            layout: {
+                'text-field': ['get', 'point_count_abbreviated'],
+                'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
+                'text-size': 12
+            }
+        });
+        
+        map.addLayer({
+            id: 'smallmouthLayer',
+            type: 'circle',
+            source: 'smallmouthSource',
+            filter: ['!', ['has', 'point_count']],
+           'paint': {
+					      		'circle-color': [				      		
+					      		'interpolate',
+     	                  ['linear'],
+     	                  ['get', 'WaterTempF'],   
+     	                  0,
+     	                  '#000000',             
+     	                  40,
+     	                  '#e4e6f0',
+     	                  46,
+     	                  '#b907f0',
+     	                  51,
+     	                  '#1ef7d7',
+     	                  56,
+     	                  '#1550b4',
+     	                  61,
+     	                  '#02fa02',
+     	                  66,
+     	                  '#FFFF00',
+     	                  71,
+     	                  '#FFA500',
+     	                  76,
+     	                  '#f71215'
+     	              ],  // end circle-color
+     	              'circle-radius': 6
+     	           }  // end paint
+        });
+        
+        document.getElementById('slider').addEventListener('input', (event) => {
+				  const year = parseInt(event.target.value);
+				  // update the map
+				  map.setFilter('smallmouthLayer', ['==', ['number', ['get', 'Year']], year]);
+				
+				  // update text in the UI
+				  document.getElementById('active-year').innerText = year;
+				});
+        
+        // inspect a cluster on click
+        map.on('click', 'clusters', (e) => {
+            const features = map.queryRenderedFeatures(e.point, {
+                layers: ['clusters']
+            });
+            const clusterId = features[0].properties.cluster_id;
+            map.getSource('smallmouthSource').getClusterExpansionZoom(
+                clusterId,
+                (err, zoom) => {
+                    if (err) return;
+
+                    map.easeTo({
+                        center: features[0].geometry.coordinates,
+                        zoom: zoom
+                    });
+                }
+            );
+        });
+        
+        
+        
+					    
+        map.addLayer({
+            'id': 'turbidityLayer',
+            'type': 'circle',
+            'source': 'smallmouthSource',
+            filter: ['!', ['has', 'point_count']],
+            'paint': {
+					      		'circle-color': [				      		
+					      		'interpolate',
+     	                  ['linear'],
+     	                  ['get', 'Turbidity'], 
+     	                  -1,                         
+     	                  '#000000', 
+     	                  .9,
+     	                  '#e4e6f0',
+     	                  1.6,
+     	                  '#b907f0',
+     	                  2,
+     	                  '#1ef7d7',
+     	                  2.4,
+     	                  '#1550b4',
+     	                  2.7,
+     	                  '#02fa02',
+     	                  3.6,
+     	                  '#FFFF00',
+     	                  5.6,
+     	                  '#FFA500',
+     	                  6.5,
+     	                  '#f71215'
+     	              ],  // end circle-color
+     	              'circle-radius': 6     
+     	           }  // end paint
+        });
+         // check for value of water temp or turbidity
+    		const selectElement = document.getElementById("dataType"); 
+      	const dataTypeSelect = selectElement.value;
+        if (dataTypeSelect === "temp") {
+    	 		map.setLayoutProperty('smallmouthLayer', 'visibility', 'visible');
+    		} else {
+        	map.setLayoutProperty('smallmouthLayer', 'visibility', 'none');
+    		}
+    		if (dataTypeSelect === "turbidity") {
+    	 		map.setLayoutProperty('turbidityLayer', 'visibility', 'visible');
+    		} else {
+        	map.setLayoutProperty('turbidityLayer', 'visibility', 'none');
+    		}
+    }
+
+       // Add zoom and rotation controls to the map.
+    	map.addControl(new mapboxgl.NavigationControl());
+ 
+ ////////   how to use a constant   	
+    	
+ /*   	const shouldShowLayer = someConditionFunction();
+    if (shouldShowLayer) {
+        map.setLayoutProperty('my-layer', 'visibility', 'visible');
+    } else {
+        map.setLayoutProperty('my-layer', 'visibility', 'none');
+    }*/
+    
+   
+    
+      
+    	map.on('style.load', () => {
+    		map.addSource('smallmouthSource',{
+   							   type: 'geojson',
+   							   data: 'Smallmouth.geojson',
+   							   cluster: true,
+            			 clusterMaxZoom: 14, // Max zoom to cluster points on
+            			 clusterRadius: 50
+     				 });
+        	addAdditionalLayer();
+    	});
+    	
+    	
+    	
+    	
+    	const layerList = document.getElementById('basemapmenu');
+    	const inputs = layerList.getElementsByTagName('input');
+
+    	for (const input of inputs) {
+    	    input.onclick = (layer) => {
+      	      const layerId = layer.target.id;
+     	       map.setStyle('mapbox://styles/mapbox/' + layerId);
+        	};
+    	}
+    	
+    	//listen for change in data type selector
+    	var whatIsDataType = document.getElementById("dataType");
+    	
+    	var whatIsLayer = 'smallmouthLayer';
+    	//reload layers on change of data type 
+    	whatIsDataType.onchange = (event) => {
+    		//  call function 
+    		if (whatIsDataType.value === "turbidity") {
+    	 		whatIsLayer = 'turbidityLayer'
+    		} 
+    		else
+    			whatIsLayer = 'smallmouthLayer'
+    		addAdditionalLayer();
+    		//map.setStyle('mapbox://styles/mapbox/light-v11');
+     		console.log("aaaaaaaaaaaaaaah!");
+ 			}
+ 			
+ 			
+			map.getCanvas().style.cursor = 'default';
+			map.on('click', (event) => {
+        		// If the user clicked on one of your markers, get its information.
+       	 		const features = map.queryRenderedFeatures(event.point, {
+   //       		layers: ['smallmouthLayer', 'turbidityLayer'] // replace with your layer name
+   							layers: [whatIsLayer]
+        		});
+        		if (!features.length) {
+    					return;
+        		} 
+        		const feature = features[0];
+			  	
+			  		const popup = new mapboxgl.Popup({ offset: [0, -15] })
+				  	.setLngLat(feature.geometry.coordinates)
+				  	.setHTML(
+				  	  `<p>Smallmouth</p>
+				  	  <p>${feature.properties.PhotoDateTimeUTC}</p>
+				  	  <p>Tag Id:&nbsp;${feature.properties.ColorTag}&nbsp;${feature.properties.Alpha}&nbsp;${feature.properties.NumberTag}</p>
+				  	  <p>Water Temp:  ${feature.properties.WaterTempF}&deg;F</p>
+				  	  <p>Turbidity:  ${feature.properties.Turbidity}&nbsp;</p>
+				  	  <p>River Level:  ${feature.properties.RiverLevel}&nbsp;ft</p>
+				  	  <p> CFS </p>
+				  	  <p>Notes:  ${feature.properties.PhotoNotes}&nbsp;</p>
+				  	  <p><a href="https://photos.app.goo.gl/cUSkSqatZouBjyLz6" target="_blank">Photo Link</a></p>`
+				  	  
+				  	)
+				  	.addTo(map);
+      });
+
+
+    </script>
+  </body>
+</html>
