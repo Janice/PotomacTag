@@ -125,7 +125,7 @@
 					<option value="Smallmouth">Smallmouth</option>
 					<option value="Largemouth">Largemouth</option>
 					<option value="Walleye">Walleye</option>
-				</select></h2><br>
+				</select></h2>
   			<h2>Date and Time Captured</h2>
   			<h2>Tag Color and ID</h2>  
   			<h2>Conditions at: 
@@ -243,12 +243,15 @@
             id: 'smallmouthLayer',
             type: 'circle',
             source: 'smallmouthSource',
-            filter: ['!', ['has', 'point_count']],
+            filter: ["all",
+            		['!', ['has', 'point_count']],
+            		['==', ['string', ['get', 'Species']], 'Smallmouth']
+            ],
            'paint': {
 					      		'circle-color': [				      		
 					      		'interpolate',
      	                  ['linear'],
-     	                  ['get', 'WaterTempF'],   
+     	                  ['get', 'LF_WaterTemp2'],   
      	                  0,
      	                  '#000000',             
      	                  40,
@@ -269,8 +272,7 @@
      	                  '#f71215'
      	              ],  // end circle-color
      	              'circle-radius': 6
-     	           },  // end paint
-     	           filter: ['==', ['string', ['get', 'Species']], 'Smallmouth'] // Initial filter condition
+     	           }  // end paint
         });
   
         // inspect a cluster on click
@@ -296,12 +298,15 @@
             'id': 'turbidityLayer',
             'type': 'circle',
             'source': 'smallmouthSource',
-            filter: ['!', ['has', 'point_count']],
+            filter: ["all",
+            		['!', ['has', 'point_count']],
+            		['==', ['string', ['get', 'Species']], 'Smallmouth']
+            ],
             'paint': {
 					      		'circle-color': [				      		
 					      		'interpolate',
      	                  ['linear'],
-     	                  ['get', 'Turbidity'], 
+     	                  ['get', 'LF_Turbidity'], 
      	                  -1,                         
      	                  '#000000', 
      	                  .9,
@@ -322,8 +327,7 @@
      	                  '#f71215'
      	              ],  // end circle-color
      	              'circle-radius': 6     
-     	           },  // end paint
-     	           filter: ['==', ['string', ['get', 'Species']], 'Smallmouth'] // Initial filter condition
+     	           }  // end paint
         });
          // check for value of water temp or turbidity
     		const selectElement = document.getElementById("dataType"); 
@@ -342,9 +346,15 @@
 				document.getElementById('species').addEventListener('change', function(e) {
         const selectedValue = e.target.value;
         console.log("selected value = " + selectedValue);
-        map.setFilter('smallmouthLayer', ['==', ['get', 'Species'], selectedValue]);
-  			map.setFilter('turbidityLayer', ['==', ['get', 'Species'], selectedValue]);
-        });
+        map.setFilter('smallmouthLayer', ["all",
+            		['!', ['has', 'point_count']],
+            		['==', ['string', ['get', 'Species']], selectedValue]
+            ])
+  			map.setFilter('turbidityLayer', ["all",
+            		['!', ['has', 'point_count']],
+            		['==', ['string', ['get', 'Species']], selectedValue]
+            ]);
+       });  // end function
     
     
     }  // end function addAdditionalLayer
@@ -367,9 +377,9 @@
     	map.on('style.load', () => {
     		map.addSource('smallmouthSource',{
    							   type: 'geojson',
-   							   data: 'Smallmouth.geojson',
+   							   data: 'SmallmouthFULL.geojson',
    							   cluster: true,
-            			 clusterMaxZoom: 14, // Max zoom to cluster points on
+            			 clusterMaxZoom: 10, // Max zoom to cluster points on
             			 clusterRadius: 50
      				 });
         	addAdditionalLayer();
