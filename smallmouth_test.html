@@ -120,7 +120,12 @@
     <div id="console">
     	
   		<div class="session">
-  			<h2>Species</h2>
+  			<h2>Species:
+				<select class="ddown" name="species" id="species">
+					<option value="Smallmouth">Smallmouth</option>
+					<option value="Largemouth">Largemouth</option>
+					<option value="Walleye">Walleye</option>
+				</select></h2><br>
   			<h2>Date and Time Captured</h2>
   			<h2>Tag Color and ID</h2>  
   			<h2>Conditions at: 
@@ -135,6 +140,7 @@
         <div class="row colors"></div>
  
       </div>
+      <!--
       <div class="session" id="sliderbar">
   		<h2>Year: <label id="active-year">2024</label></h2>
   			<input
@@ -147,6 +153,7 @@
     			value="2024"
   			/>
 			</div>
+			-->
       
 		</div>
 		<div class="fixed" id="basemapmenu">
@@ -183,15 +190,11 @@
         zoom: 9
       });
       
-  /*    setTimeout(() => {
-  // Code to execute after 4 seconds
-  			console.log("This will run after 4 seconds");
-			}, 4000);  */
-      
-      
       
           	// Add GeoJSON source and layer
 			function addAdditionalLayer() {
+				
+			//	let filterSpecies = ['!=', ['string', ['get', 'Species']], 'placeholder'];
 				
 				map.addLayer({
             'id': 'clusters',
@@ -266,18 +269,10 @@
      	                  '#f71215'
      	              ],  // end circle-color
      	              'circle-radius': 6
-     	           }  // end paint
+     	           },  // end paint
+     	           filter: ['==', ['string', ['get', 'Species']], 'Smallmouth'] // Initial filter condition
         });
-        
-        document.getElementById('slider').addEventListener('input', (event) => {
-				  const year = parseInt(event.target.value);
-				  // update the map
-				  map.setFilter('smallmouthLayer', ['==', ['number', ['get', 'Year']], year]);
-				
-				  // update text in the UI
-				  document.getElementById('active-year').innerText = year;
-				});
-        
+  
         // inspect a cluster on click
         map.on('click', 'clusters', (e) => {
             const features = map.queryRenderedFeatures(e.point, {
@@ -296,10 +291,7 @@
                 }
             );
         });
-        
-        
-        
-					    
+		    
         map.addLayer({
             'id': 'turbidityLayer',
             'type': 'circle',
@@ -330,7 +322,8 @@
      	                  '#f71215'
      	              ],  // end circle-color
      	              'circle-radius': 6     
-     	           }  // end paint
+     	           },  // end paint
+     	           filter: ['==', ['string', ['get', 'Species']], 'Smallmouth'] // Initial filter condition
         });
          // check for value of water temp or turbidity
     		const selectElement = document.getElementById("dataType"); 
@@ -345,7 +338,16 @@
     		} else {
         	map.setLayoutProperty('turbidityLayer', 'visibility', 'none');
     		}
-    }
+				
+				document.getElementById('species').addEventListener('change', function(e) {
+        const selectedValue = e.target.value;
+        console.log("selected value = " + selectedValue);
+        map.setFilter('smallmouthLayer', ['==', ['get', 'Species'], selectedValue]);
+  			map.setFilter('turbidityLayer', ['==', ['get', 'Species'], selectedValue]);
+        });
+    
+    
+    }  // end function addAdditionalLayer
 
        // Add zoom and rotation controls to the map.
     	map.addControl(new mapboxgl.NavigationControl());
@@ -400,7 +402,7 @@
     			whatIsLayer = 'smallmouthLayer'
     		addAdditionalLayer();
     		//map.setStyle('mapbox://styles/mapbox/light-v11');
-     		console.log("aaaaaaaaaaaaaaah!");
+     		//console.log("aaaaaaaaaaaaaaah!");
  			}
  			
  			
