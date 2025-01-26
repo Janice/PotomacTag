@@ -349,10 +349,10 @@
         console.log("selected value = " + selectedValue);
         if (selectedValue === 'All') {
               filterSpecies = ['match', ['get', 'Species'], ['Smallmouth', 'Walleye', 'Largemouth'], true, false];
-            } else {
-            filterSpecies = ['==', ['string', ['get', 'Species'], selectedValue]]
-          };
-            
+            }
+        else {
+        filterSpecies = ['==', ['string', ['get', 'Species']], selectedValue];
+        };
             	
         map.setFilter('smallmouthLayer', ['all', ['!', ['has', 'point_count']], filterSpecies]);
   			map.setFilter('turbidityLayer', ['all', ['!', ['has', 'point_count']], filterSpecies]);
