@@ -131,7 +131,8 @@
   			<h2>Tag Color and ID</h2>  
   			<h2>Conditions at: 
   			<select class="ddown" name="gauge" id="gauge">
-  				<option class="ddown" value="LF">Little Falls</option></h2>
+  				<option class="ddown" value="LF">Little Falls</option>
+  				<option class="ddown" value="POR">Point of Rocks</option></h2>
 				</select><br>
 				<h2>Data:
 				<select class="ddown" name="dataType" id="dataType">
@@ -241,7 +242,7 @@
         });
         
         map.addLayer({
-            id: 'smallmouthLayer',
+            id: 'tempLayerLF',
             type: 'circle',
             source: 'smallmouthSource',
             filter: ["all",
@@ -253,6 +254,42 @@
 					      		'interpolate',
      	                  ['linear'],
      	                  ['get', 'LF_WaterTemp2'],   
+     	                  0,
+     	                  '#000000',             
+     	                  40,
+     	                  '#e4e6f0',
+     	                  46,
+     	                  '#b907f0',
+     	                  51,
+     	                  '#1ef7d7',
+     	                  56,
+     	                  '#1550b4',
+     	                  61,
+     	                  '#02fa02',
+     	                  66,
+     	                  '#FFFF00',
+     	                  71,
+     	                  '#FFA500',
+     	                  76,
+     	                  '#f71215'
+     	              ],  // end circle-color
+     	              'circle-radius': 6
+     	           }  // end paint
+        });
+        
+        map.addLayer({
+            id: 'tempLayerPOR',
+            type: 'circle',
+            source: 'smallmouthSource',
+            filter: ["all",
+            		['!', ['has', 'point_count']],
+            		filterSpecies
+            ],
+           'paint': {
+					      		'circle-color': [				      		
+					      		'interpolate',
+     	                  ['linear'],
+     	                  ['get', 'POR_WaterTemp2'],   
      	                  0,
      	                  '#000000',             
      	                  40,
@@ -296,7 +333,7 @@
         });
 		    
         map.addLayer({
-            'id': 'turbidityLayer',
+            'id': 'turbidityLayerLF',
             'type': 'circle',
             'source': 'smallmouthSource',
             filter: ["all",
@@ -330,19 +367,69 @@
      	              'circle-radius': 6     
      	           }  // end paint
         });
+        
+         map.addLayer({
+            'id': 'turbidityLayerPOR',
+            'type': 'circle',
+            'source': 'smallmouthSource',
+            filter: ["all",
+            		['!', ['has', 'point_count']],
+            		filterSpecies
+            ],
+            'paint': {
+					      		'circle-color': [				      		
+					      		'interpolate',
+     	                  ['linear'],
+     	                  ['get', 'POR_Turbidity'], 
+     	                  -1,                         
+     	                  '#000000', 
+     	                  .9,
+     	                  '#e4e6f0',
+     	                  1.6,
+     	                  '#b907f0',
+     	                  2,
+     	                  '#1ef7d7',
+     	                  2.4,
+     	                  '#1550b4',
+     	                  2.7,
+     	                  '#02fa02',
+     	                  3.6,
+     	                  '#FFFF00',
+     	                  5.6,
+     	                  '#FFA500',
+     	                  6.5,
+     	                  '#f71215'
+     	              ],  // end circle-color
+     	              'circle-radius': 6     
+     	           }  // end paint
+        });
+        
+         //  check for location selector
+         const gaugeLocation = document.getElementById("gauge");
+         const locationSelect = gaugeLocation.value;
          // check for value of water temp or turbidity
-    		const selectElement = document.getElementById("dataType"); 
-      	const dataTypeSelect = selectElement.value;
-        if (dataTypeSelect === "temp") {
-    	 		map.setLayoutProperty('smallmouthLayer', 'visibility', 'visible');
-    		} else {
-        	map.setLayoutProperty('smallmouthLayer', 'visibility', 'none');
-    		}
-    		if (dataTypeSelect === "turbidity") {
-    	 		map.setLayoutProperty('turbidityLayer', 'visibility', 'visible');
-    		} else {
-        	map.setLayoutProperty('turbidityLayer', 'visibility', 'none');
-    		}
+    					const selectElement = document.getElementById("dataType"); 
+      				const dataTypeSelect = selectElement.value;
+        			if (dataTypeSelect === "temp" && locationSelect == "LF") {
+    	 					map.setLayoutProperty('tempLayerLF', 'visibility', 'visible');
+    					} else {
+        				map.setLayoutProperty('tempLayerLF', 'visibility', 'none');
+    					}
+    					if (dataTypeSelect === "turbidity" && locationSelect == "LF") {
+    	 					map.setLayoutProperty('turbidityLayerLF', 'visibility', 'visible');
+    					} else {
+        				map.setLayoutProperty('turbidityLayerLF', 'visibility', 'none');
+    					}
+    					if (dataTypeSelect === "temp" && locationSelect == "POR") {
+    	 					map.setLayoutProperty('tempLayerPOR', 'visibility', 'visible');
+    					} else {
+        				map.setLayoutProperty('tempLayerPOR', 'visibility', 'none');
+    					}
+    					if (dataTypeSelect === "turbidity" && locationSelect == "POR") {
+    	 					map.setLayoutProperty('turbidityLayerPOR', 'visibility', 'visible');
+    					} else {
+        				map.setLayoutProperty('turbidityLayerPOR', 'visibility', 'none');
+    					}
 				
 				document.getElementById('species').addEventListener('change', function(e) {
         const selectedValue = e.target.value;
@@ -354,8 +441,10 @@
         filterSpecies = ['==', ['string', ['get', 'Species']], selectedValue];
         };
             	
-        map.setFilter('smallmouthLayer', ['all', ['!', ['has', 'point_count']], filterSpecies]);
-  			map.setFilter('turbidityLayer', ['all', ['!', ['has', 'point_count']], filterSpecies]);
+        map.setFilter('tempLayerLF', ['all', ['!', ['has', 'point_count']], filterSpecies]);
+  			map.setFilter('turbidityLayerLF', ['all', ['!', ['has', 'point_count']], filterSpecies]);
+  			map.setFilter('tempLayerPOR', ['all', ['!', ['has', 'point_count']], filterSpecies]);
+  			map.setFilter('turbidityLayerPOR', ['all', ['!', ['has', 'point_count']], filterSpecies]);
        });  // end function
     
     
@@ -400,18 +489,48 @@
         	};
     	}
     	
+    	var gaugeLocation = document.getElementById("gauge");
+      
     	//listen for change in data type selector
     	var whatIsDataType = document.getElementById("dataType");
     	
-    	var whatIsLayer = 'smallmouthLayer';
+    	var whatIsLayer = 'tempLayerLF';
     	//reload layers on change of data type 
     	whatIsDataType.onchange = (event) => {
+    		const locationSelect = gaugeLocation.value;
     		//  call function 
-    		if (whatIsDataType.value === "turbidity") {
-    	 		whatIsLayer = 'turbidityLayer'
+    		if (whatIsDataType.value === "turbidity" && locationSelect == "LF") {
+    	 		whatIsLayer = 'turbidityLayerLF'
+    		} 
+    		else if (whatIsDataType.value === "turbidity" && locationSelect == "POR") {
+    	 		whatIsLayer = 'turbidityLayerPOR'
+    		} 
+    		else if (whatIsDataType.value === "temp" && locationSelect == "POR") {
+    	 		whatIsLayer = 'tempLayerPOR'
     		} 
     		else
-    			whatIsLayer = 'smallmouthLayer'
+    			whatIsLayer = 'tempLayerLF'
+    		addAdditionalLayer();
+    		//map.setStyle('mapbox://styles/mapbox/light-v11');
+     		//console.log("aaaaaaaaaaaaaaah!");
+ 			}
+ 			
+ 			
+ 			gaugeLocation.onchange = (event) => {
+ 				const locationSelect = gaugeLocation.value;
+ 				var whatIsDataType = document.getElementById("dataType");
+    		//  call function 
+    		if (whatIsDataType.value === "turbidity" && locationSelect == "LF") {
+    	 		whatIsLayer = 'turbidityLayerLF'
+    		} 
+    		else if (whatIsDataType.value === "turbidity" && locationSelect == "POR") {
+    	 		whatIsLayer = 'turbidityLayerPOR'
+    		} 
+    		else if (whatIsDataType.value === "temp" && locationSelect == "POR") {
+    	 		whatIsLayer = 'tempLayerPOR'
+    		} 
+    		else
+    			whatIsLayer = 'tempLayerLF'
     		addAdditionalLayer();
     		//map.setStyle('mapbox://styles/mapbox/light-v11');
      		//console.log("aaaaaaaaaaaaaaah!");
@@ -422,7 +541,7 @@
 			map.on('click', (event) => {
         		// If the user clicked on one of your markers, get its information.
        	 		const features = map.queryRenderedFeatures(event.point, {
-   //       		layers: ['smallmouthLayer', 'turbidityLayer'] // replace with your layer name
+   //       		layers: ['tempLayerLF', 'turbidityLayer'] // replace with your layer name
    							layers: [whatIsLayer]
         		});
         		if (!features.length) {
@@ -436,10 +555,13 @@
 				  	  `<p>Smallmouth</p>
 				  	  <p>${feature.properties.PhotoDateTimeUTC}</p>
 				  	  <p>Tag Id:&nbsp;${feature.properties.ColorTag}&nbsp;${feature.properties.Alpha}&nbsp;${feature.properties.NumberTag}</p>
-				  	  <p>Water Temp:  ${feature.properties.WaterTempF}&deg;F</p>
-				  	  <p>Turbidity:  ${feature.properties.Turbidity}&nbsp;</p>
-				  	  <p>River Level:  ${feature.properties.RiverLevel}&nbsp;ft</p>
-				  	  <p> CFS </p>
+				  	  <p>Little Falls Water Temp:  ${feature.properties.LF_WaterTemp2}&deg;F</p>
+				  	  <p>Point of Rocks Water Temp:  ${feature.properties.POR_WaterTemp2}&deg;F</p>
+				  	  <p>Little Falls Turbidity:  ${feature.properties.LF_Turbidity}&nbsp;</p>
+				  	  <p>Point of Rocks Turbidity:  ${feature.properties.POR_Turbidity}&nbsp;</p>
+				  	  <p>Little Falls River Level:  ${feature.properties.LF_RiverLevel}&nbsp;ft</p>
+				  	  <p>Little Falls Discharge:  ${feature.properties.LF_Discharge}&nbsp;cfs</p>
+				  	  <p>Point of Rocks Discharge:  ${feature.properties.POR_Discharge}&nbsp;cfs</p>
 				  	  <p>Notes:  ${feature.properties.PhotoNotes}&nbsp;</p>
 				  	  <p><a href="https://photos.app.goo.gl/cUSkSqatZouBjyLz6" target="_blank">Photo Link</a></p>`
 				  	  
