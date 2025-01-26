@@ -122,6 +122,7 @@
   		<div class="session">
   			<h2>Species:
 				<select class="ddown" name="species" id="species">
+					<option value="All">All</option>
 					<option value="Smallmouth">Smallmouth</option>
 					<option value="Largemouth">Largemouth</option>
 					<option value="Walleye">Walleye</option>
@@ -194,14 +195,14 @@
           	// Add GeoJSON source and layer
 			function addAdditionalLayer() {
 				
-			//	let filterSpecies = ['!=', ['string', ['get', 'Species']], 'placeholder'];
+				let filterSpecies = ['!=', ['string', ['get', 'Species']], 'placeholder'];
 				
 				map.addLayer({
             'id': 'clusters',
             'type': 'circle',
             'source': 'smallmouthSource',
             filter: ['has', 'point_count'],
-            paint: {
+    				paint: {
                 // Use step expressions (https://docs.mapbox.com/style-spec/reference/expressions/#step)
                 // with three steps to implement three types of circles:
                 //   * Blue, 20px circles when point count is less than 100
@@ -245,7 +246,7 @@
             source: 'smallmouthSource',
             filter: ["all",
             		['!', ['has', 'point_count']],
-            		['==', ['string', ['get', 'Species']], 'Smallmouth']
+            		filterSpecies
             ],
            'paint': {
 					      		'circle-color': [				      		
@@ -300,7 +301,7 @@
             'source': 'smallmouthSource',
             filter: ["all",
             		['!', ['has', 'point_count']],
-            		['==', ['string', ['get', 'Species']], 'Smallmouth']
+            		filterSpecies
             ],
             'paint': {
 					      		'circle-color': [				      		
@@ -346,14 +347,15 @@
 				document.getElementById('species').addEventListener('change', function(e) {
         const selectedValue = e.target.value;
         console.log("selected value = " + selectedValue);
-        map.setFilter('smallmouthLayer', ["all",
-            		['!', ['has', 'point_count']],
-            		['==', ['string', ['get', 'Species']], selectedValue]
-            ])
-  			map.setFilter('turbidityLayer', ["all",
-            		['!', ['has', 'point_count']],
-            		['==', ['string', ['get', 'Species']], selectedValue]
-            ]);
+        if (selectedValue === 'All') {
+              filterSpecies = ['match', ['get', 'Species'], ['Smallmouth', 'Walleye', 'Largemouth']]
+            } else {
+            filterSpecies = ['==', ['string', ['get', 'Species'], selectedValue]]
+          };
+            
+            	
+        map.setFilter('smallmouthLayer', ['all', ['!', ['has', 'point_count']], filterSpecies]);
+  			map.setFilter('turbidityLayer', ['all', ['!', ['has', 'point_count']], filterSpecies]);
        });  // end function
     
     
