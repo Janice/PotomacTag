@@ -348,7 +348,7 @@
         const selectedValue = e.target.value;
         console.log("selected value = " + selectedValue);
         if (selectedValue === 'All') {
-              filterSpecies = ['match', ['get', 'Species'], ['Smallmouth', 'Walleye', 'Largemouth']]
+              filterSpecies = ['match', ['get', 'Species'], ['Smallmouth', 'Walleye', 'Largemouth'], true, false];
             } else {
             filterSpecies = ['==', ['string', ['get', 'Species'], selectedValue]]
           };
