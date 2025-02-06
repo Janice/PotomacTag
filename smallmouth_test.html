@@ -171,24 +171,24 @@
 		</div>
 		<div class="fixed" id="basemapmenu">
 			<label>
-			  <input id="outdoors-v12" type="radio" name="basemap" value="outdoor" checked>
+			  <input id="mapbox/outdoors-v12" type="radio" name="basemap" value="outdoor" checked>
 			  <img class="maptype" src="outdoors.png">
 			</label>
 			<label>
-			  <input id="light-v11" type="radio" name="basemap" value="light">
+			  <input id="janice/cm6tf2xow007d01s15mssh4ny" type="radio" name="basemap" value="light">
 			  <img class="maptype" src="light.png">
 			</label>
 			<label>
-			  <input id="dark-v11" type="radio" name="basemap" value="dark">
+			  <input id="mapbox/dark-v11" type="radio" name="basemap" value="dark">
 			  <img class="maptype" src="dark.png">
 			</label>
 			
 			<label>
-			  <input id="satellite-v9" type="radio" name="basemap" value="sat">
+			  <input id="mapbox/satellite-v9" type="radio" name="basemap" value="sat">
 			  <img class="maptype" src="satellite.png">
 			</label>
 			<label>
-			  <input id="satellite-streets-v12" type="radio" name="basemap" value="street">
+			  <input id="mapbox/satellite-streets-v12" type="radio" name="basemap" value="street">
 			  <img class="maptype" src="streets.png">
 			</label>
 		</div>
@@ -198,7 +198,7 @@
       const map = new mapboxgl.Map({
         container: 'map',
         // Replace YOUR_STYLE_URL with your style URL.
-        style: 'mapbox://styles/mapbox/light-v11',
+        style: 'mapbox://styles/janice/cm6tf2xow007d01s15mssh4ny',
         center: [-77.436, 39.116],
         zoom: 9
       });
@@ -695,7 +695,7 @@
     	for (const input of inputs) {
     	    input.onclick = (layer) => {
       	      const layerId = layer.target.id;
-     	       map.setStyle('mapbox://styles/mapbox/' + layerId);
+     	       map.setStyle('mapbox://styles/' + layerId); 
         	};
     	}
     	
@@ -792,7 +792,7 @@
 			  				
 				  			.setLngLat(feature.geometry.coordinates)
 				  			.setHTML(
-				  			  `<p>Smallmouth</p>
+				  			  `<p>${feature.properties.Species}</p>
 				  			  <p>${feature.properties.PhotoDateTimeUTC}</p>
 				  			  <p>Tag Id:&nbsp;${feature.properties.ColorTag}&nbsp;${feature.properties.Alpha}&nbsp;${feature.properties.NumberTag}</p>
 				  			  <p>Point of Rocks Water Temp:  ${feature.properties.POR_WaterTempF}&deg;F</p>
@@ -810,7 +810,7 @@
 			  				
 				  			.setLngLat(feature.geometry.coordinates)
 				  			.setHTML(
-				  			  `<p>Smallmouth</p>
+				  			  `<p>${feature.properties.Species}</p>
 				  			  <p>${feature.properties.PhotoDateTimeUTC}</p>
 				  			  <p>Tag Id:&nbsp;${feature.properties.ColorTag}&nbsp;${feature.properties.Alpha}&nbsp;${feature.properties.NumberTag}</p>
 				  			  <p>Little Falls Water Temp:  ${feature.properties.LF_WaterTempF}&deg;F</p>

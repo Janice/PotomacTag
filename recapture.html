@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Tagged Smallmouth</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js"></script>
+    <link
+      href="https://api.tiles.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      }
+      
+      #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+      }
+      
+      h1 {
+        font-size: 20px;
+        line-height: 30px;
+      }
+      
+      h2 {
+        font-size: 10px;
+        line-height: 12px;
+        margin-bottom: 2px;
+      }
+      label
+			{
+    		font-size: 10px;
+        line-height: 12px;
+        margin-bottom: 3px;
+			}
+      p {
+   			margin:0;
+  			padding:0;
+    		line-height:1.1;
+			}
+      
+      a {
+        text-decoration: none;
+        color: #2dc4b2;
+      }
+      img.maptype {
+  			width: 12%;
+			}
+			img.popup {
+				width: 50%;
+			}
+      
+      #console {
+        position: absolute;
+        width: 160px;
+        margin: 10px;
+        padding: 10px 20px;
+        background-color: white;
+      }
+      .session {
+			  margin-bottom: 20px;
+			}
+			
+			.ddown {
+				font-size: 10px;
+        line-height: 12px;
+			}
+
+			.row {
+			  height: 10px;
+			  width: 100%;
+			}
+       .colors {
+        background: linear-gradient(
+          to right,
+					#e4e6f0,
+					#b907f0,
+					#1ef7d7,
+					#1550b4,
+					#02fa02,
+					#FFFF00,
+					#FFA500,
+					#f71215
+        );
+  			margin-bottom: 10px;
+  			margin-top: 10px;
+  		}
+        
+        .label {
+ 				 width: 17%;
+  			display: inline-block;
+  			text-align: center;
+  			font-size: 10px;
+        line-height: 12px;
+			}
+
+			input[type="radio"] {
+				cursor: pointer;
+			  display: none;
+			  float: left;
+      	clear: none;
+      	margin: 2px 0 0 2px;
+			}
+			div.fixed {
+  			position: fixed;
+  			bottom: 20px;
+  			border: none;
+			} 
+
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <div id="console">
+    	
+  		<div class="session">
+  			<label for="tagNumber">Tag Number:</label>
+					 <input type="text" id="tagNumber" name="tagNumber" value="81">
+				</h2>
+				<h2> Tag #81 is shown for example</h2>
+      </div>
+      <!--
+      <div class="session" id="sliderbar">
+  		<h2>Year: <label id="active-year">2024</label></h2>
+  			<input
+    			id="slider"
+    			class="row"
+    			type="range"
+    			min="2020"
+    			max="2024"
+    			step="1"
+    			value="2024"
+  			/>
+			</div>
+			-->
+      
+		</div>
+		<div class="fixed" id="basemapmenu">
+			<label>
+			  <input id="mapbox/outdoors-v12" type="radio" name="basemap" value="outdoor" checked>
+			  <img class="maptype" src="outdoors.png">
+			</label>
+			<label>
+			  <input id="janice/cm6tf2xow007d01s15mssh4ny" type="radio" name="basemap" value="light">
+			  <img class="maptype" src="light.png">
+			</label>
+			<label>
+			  <input id="mapbox/dark-v11" type="radio" name="basemap" value="dark">
+			  <img class="maptype" src="dark.png">
+			</label>
+			
+			<label>
+			  <input id="mapbox/satellite-v9" type="radio" name="basemap" value="sat">
+			  <img class="maptype" src="satellite.png">
+			</label>
+			<label>
+			  <input id="mapbox/satellite-streets-v12" type="radio" name="basemap" value="street">
+			  <img class="maptype" src="streets.png">
+			</label>
+		</div>
+    <script>
+    	
+    	
+    	
+    	const textbox = document.getElementById('tagNumber'); // Replace 'myTextbox' with your textbox ID
+
+			textbox.addEventListener('input', function(e) {
+				filterTag = ['==', ['string', ['get', 'NumberTag']], e.target.value];
+				map.setFilter('tagLayer',  filterTag);
+  			console.log("Text changed:", e.target.value);
+  			console.log("inside event listener Filtering:", filterTag);
+  			map.setCenter([-77.436, 39.116]);
+  			map.setZoom(9);
+  			// Do something with the new value here
+			});
+			
+      // The value for 'accessToken' begins with 'pk...'
+      mapboxgl.accessToken = 'pk.eyJ1IjoiamFuaWNlIiwiYSI6ImJ0ak45VWcifQ.HJ5_ISkOo7TsTBA_51jsLQ';
+      const map = new mapboxgl.Map({
+        container: 'map',
+        // Replace YOUR_STYLE_URL with your style URL.
+        //style: 'mapbox://styles/mapbox/light-v11',
+        style: 'mapbox://styles/janice/cm6tf2xow007d01s15mssh4ny',
+        center: [-77.436, 39.116],
+        zoom: 9
+      });
+      
+      //mapbox://styles/janice/cm6tf2xow007d01s15mssh4ny
+      
+          	// Add GeoJSON source and layer
+			function addAdditionalLayer() {
+				
+				let filterTag = ['==', ['string', ['get', 'NumberTag']], document.getElementById('tagNumber').value];
+				
+				console.log("inside addAdditionalLayer:", filterTag);
+				
+				 map.loadImage(
+            'fisheye.png',
+            (error, image) => {
+                if (error) throw error;
+
+                // Add the image to the map style.
+                map.addImage('eye', image);
+
+               
+ 
+        map.addLayer({
+            id: 'tagLayer',
+            type: 'symbol',
+            source: 'smallmouthSource',
+            filter: 
+            		filterTag,
+       //    paint: {
+    	//			'circle-radius': 4,
+    	//			'circle-color': '#AAFF00',
+    	//			'circle-stroke-color': 'black',
+    	//			'circle-stroke-width': 1,
+   		// 			'circle-opacity': 0.5
+  	//			},		 // end paint
+  				layout: {
+                        'icon-image': 'eye', // reference the image
+                        'icon-size': 0.15
+                    }
+        });
+
+      });
+ 
+    
+    }  // end function addAdditionalLayer
+
+       // Add zoom and rotation controls to the map.
+    	map.addControl(new mapboxgl.NavigationControl());
+ 
+ ////////   how to use a constant   	
+    	
+ /*   	const shouldShowLayer = someConditionFunction();
+    if (shouldShowLayer) {
+        map.setLayoutProperty('my-layer', 'visibility', 'visible');
+    } else {
+        map.setLayoutProperty('my-layer', 'visibility', 'none');
+    }*/
+    
+   
+    
+      
+    	map.on('style.load', () => {
+    		map.addSource('smallmouthSource',{
+   							   type: 'geojson',
+   							   data: 'SmallmouthFullDataset.geojson'
+     				 });
+        	addAdditionalLayer();
+    	});
+    	
+    	
+    	
+    	
+    	const layerList = document.getElementById('basemapmenu');
+    	const inputs = layerList.getElementsByTagName('input');
+
+    	for (const input of inputs) {
+    	    input.onclick = (layer) => {
+      	      const layerId = layer.target.id;
+     	       map.setStyle('mapbox://styles/' + layerId); 
+        	};
+    	}
+    	
+
+ 			
+			map.getCanvas().style.cursor = 'default';      
+			
+			map.on('click', 'tagLayer', (e) => {
+            new mapboxgl.Popup()
+                .setLngLat(e.features[0].geometry.coordinates)
+				  			.setHTML(
+				  	  		`<p>${e.features[0].properties.Species}</p>
+				  	  		<p>${e.features[0].properties.PhotoDateTimeUTC}</p>
+				  	  		<p>Tag Id:&nbsp;${e.features[0].properties.ColorTag}&nbsp;${e.features[0].properties.Alpha}&nbsp;${e.features[0].properties.NumberTag}</p>
+				  	  		<p>Little Falls Water Temp:  ${e.features[0].properties.LF_WaterTempF}&deg;F</p>
+				  	  		<p>Little Falls Turbidity:  ${e.features[0].properties.LF_Turbidity}&nbsp;</p>
+				  	  		<p>Little Falls River Level:  ${e.features[0].properties.LF_RiverLevel}&nbsp;ft</p>
+				  	  		<p>Little Falls Discharge:  ${e.features[0].properties.LF_Discharge}&nbsp;cfs</p>
+				  	  		<p>Notes:  ${e.features[0].properties.PhotoNotes}&nbsp;</p>`
+				  	  
+				  	)
+				  	.addTo(map);
+        });
+        
+        
+
+
+    </script>
+  </body>
+</html>
