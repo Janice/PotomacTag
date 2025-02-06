@@ -127,7 +127,16 @@
 					<option value="Largemouth">Largemouth</option>
 					<option value="Walleye">Walleye</option>
 				</select></h2>
-  			<h2>Date and Time Captured</h2>
+				<h2>Year Captured:
+				<select class="ddown" name="year" id="year">
+					<option value="All">All</option>
+					<option value="2025">2025</option>
+					<option value="2024">2024</option>
+					<option value="2023">2023</option>
+					<option value="2022">2022</option>
+					<option value="2021">2021</option>
+					<option value="2020">2020</option>
+				</select></h2>
   			<h2>Tag Color and ID</h2>  
   			<h2>Conditions at: 
   			<select class="ddown" name="gauge" id="gauge">
@@ -137,7 +146,9 @@
 				<h2>Data:
 				<select class="ddown" name="dataType" id="dataType">
 					<option value="temp">Water Temperature</option>
-					<option value="turbidity">Turbidity</option></h2>
+					<option value="turbidity">Turbidity</option>
+					<option value="discharge">Discharge</option>
+					<option value="level">Water Level</option></h2>
 				</select><br>
         <div class="row colors"></div>
  
@@ -197,6 +208,7 @@
 			function addAdditionalLayer() {
 				
 				let filterSpecies = ['!=', ['string', ['get', 'Species']], 'placeholder'];
+				let filterYear = ['!=', ['string', ['get', 'year']], 'placeholder'];
 				
 				map.addLayer({
             'id': 'clusters',
@@ -241,41 +253,6 @@
             }
         });
         
-        map.addLayer({
-            id: 'tempLayerLF',
-            type: 'circle',
-            source: 'smallmouthSource',
-            filter: ["all",
-            		['!', ['has', 'point_count']],
-            		filterSpecies
-            ],
-           'paint': {
-					      		'circle-color': [				      		
-					      		'interpolate',
-     	                  ['linear'],
-     	                  ['get', 'LF_WaterTemp2'],   
-     	                  0,
-     	                  '#000000',             
-     	                  40,
-     	                  '#e4e6f0',
-     	                  46,
-     	                  '#b907f0',
-     	                  51,
-     	                  '#1ef7d7',
-     	                  56,
-     	                  '#1550b4',
-     	                  61,
-     	                  '#02fa02',
-     	                  66,
-     	                  '#FFFF00',
-     	                  71,
-     	                  '#FFA500',
-     	                  76,
-     	                  '#f71215'
-     	              ],  // end circle-color
-     	              'circle-radius': 6
-     	           }  // end paint
-        });
         
         map.addLayer({
             id: 'tempLayerPOR',
@@ -283,13 +260,14 @@
             source: 'smallmouthSource',
             filter: ["all",
             		['!', ['has', 'point_count']],
-            		filterSpecies
+            		filterSpecies,
+            		filterYear
             ],
            'paint': {
 					      		'circle-color': [				      		
 					      		'interpolate',
      	                  ['linear'],
-     	                  ['get', 'POR_WaterTemp2'],   
+     	                  ['get', 'POR_WaterTempF'],   
      	                  0,
      	                  '#000000',             
      	                  40,
@@ -338,7 +316,8 @@
             'source': 'smallmouthSource',
             filter: ["all",
             		['!', ['has', 'point_count']],
-            		filterSpecies
+            		filterSpecies,
+            		filterYear
             ],
             'paint': {
 					      		'circle-color': [				      		
@@ -374,7 +353,8 @@
             'source': 'smallmouthSource',
             filter: ["all",
             		['!', ['has', 'point_count']],
-            		filterSpecies
+            		filterSpecies,
+            		filterYear
             ],
             'paint': {
 					      		'circle-color': [				      		
@@ -404,6 +384,192 @@
      	           }  // end paint
         });
         
+        map.addLayer({
+            'id': 'dischargeLayerPOR',
+            'type': 'circle',
+            'source': 'smallmouthSource',
+            filter: ["all",
+            		['!', ['has', 'point_count']],
+            		filterSpecies,
+            		filterYear
+            ],
+            'paint': {
+					      		'circle-color': [				      		
+					      		'interpolate',
+     	                  ['linear'],
+     	                  ['get', 'POR_Discharge'], 
+     	                  -1,                         
+     	                  '#000000', 
+     	                  2000,
+     	                  '#e4e6f0',
+     	                  11000,
+     	                  '#b907f0',
+     	                  16000,
+     	                  '#1ef7d7',
+     	                  21000,
+     	                  '#1550b4',
+     	                  26000,
+     	                  '#02fa02',
+     	                  31000,
+     	                  '#FFFF00',
+     	                  41000,
+     	                  '#FFA500',
+     	                  51000,
+     	                  '#f71215'
+     	              ],  // end circle-color
+     	              'circle-radius': 6     
+     	           }  // end paint
+        });
+        
+        map.addLayer({
+            'id': 'dischargeLayerLF',
+            'type': 'circle',
+            'source': 'smallmouthSource',
+            filter: ["all",
+            		['!', ['has', 'point_count']],
+            		filterSpecies,
+            		filterYear
+            ],
+            'paint': {
+					      		'circle-color': [				      		
+					      		'interpolate',
+     	                  ['linear'],
+     	                  ['get', 'LF_Discharge'], 
+     	                 -1,                         
+     	                  '#000000', 
+     	                  2000,
+     	                  '#e4e6f0',
+     	                  11000,
+     	                  '#b907f0',
+     	                  16000,
+     	                  '#1ef7d7',
+     	                  21000,
+     	                  '#1550b4',
+     	                  26000,
+     	                  '#02fa02',
+     	                  31000,
+     	                  '#FFFF00',
+     	                  41000,
+     	                  '#FFA500',
+     	                  51000,
+     	                  '#f71215'
+     	              ],  // end circle-color
+     	              'circle-radius': 6     
+     	           }  // end paint
+        });
+        
+        //LF_RiverLevel
+        map.addLayer({
+            'id': 'levelLayerLF',
+            'type': 'circle',
+            'source': 'smallmouthSource',
+            filter: ["all",
+            		['!', ['has', 'point_count']],
+            		filterSpecies,
+            		filterYear
+            ],
+            'paint': {
+					      		'circle-color': [				      		
+					      		'interpolate',
+     	                  ['linear'],
+     	                  ['get', 'LF_RiverLevel'], 
+     	                 -1,                         
+     	                  '#000000', 
+     	                  2,
+     	                  '#e4e6f0',
+     	                  2.6,
+     	                  '#b907f0',
+     	                  3.1,
+     	                  '#1ef7d7',
+     	                  4.1,
+     	                  '#1550b4',
+     	                  4.6,
+     	                  '#02fa02',
+     	                  6,
+     	                  '#FFFF00',
+     	                  7,
+     	                  '#FFA500',
+     	                  8,
+     	                  '#f71215'
+     	              ],  // end circle-color
+     	              'circle-radius': 6     
+     	           }  // end paint
+        });
+        
+        map.addLayer({
+            'id': 'levelLayerPOR',
+            'type': 'circle',
+            'source': 'smallmouthSource',
+            filter: ["all",
+            		['!', ['has', 'point_count']],
+            		filterSpecies,
+            		filterYear
+            ],
+            'paint': {
+					      		'circle-color': [				      		
+					      		'interpolate',
+     	                  ['linear'],
+     	                  ['get', 'POR_RiverLevel'], 
+     	                 -1,                         
+     	                  '#000000', 
+     	                  2,
+     	                  '#e4e6f0',
+     	                  2.6,
+     	                  '#b907f0',
+     	                  3.1,
+     	                  '#1ef7d7',
+     	                  4.1,
+     	                  '#1550b4',
+     	                  4.6,
+     	                  '#02fa02',
+     	                  6,
+     	                  '#FFFF00',
+     	                  7,
+     	                  '#FFA500',
+     	                  8,
+     	                  '#f71215'
+     	              ],  // end circle-color
+     	              'circle-radius': 6     
+     	           }  // end paint
+        });
+        
+        map.addLayer({
+            id: 'tempLayerLF',
+            type: 'circle',
+            source: 'smallmouthSource',
+            filter: ["all",
+            		['!', ['has', 'point_count']],
+            		filterSpecies,
+            		filterYear
+            ],
+           'paint': {
+					      		'circle-color': [				      		
+					      		'interpolate',
+     	                  ['linear'],
+     	                  ['get', 'LF_WaterTempF'],   
+     	                  0,
+     	                  '#000000',             
+     	                  40,
+     	                  '#e4e6f0',
+     	                  46,
+     	                  '#b907f0',
+     	                  51,
+     	                  '#1ef7d7',
+     	                  56,
+     	                  '#1550b4',
+     	                  61,
+     	                  '#02fa02',
+     	                  66,
+     	                  '#FFFF00',
+     	                  71,
+     	                  '#FFA500',
+     	                  76,
+     	                  '#f71215'
+     	              ],  // end circle-color
+     	              'circle-radius': 6
+     	           }  // end paint
+        });
+        
          //  check for location selector
          const gaugeLocation = document.getElementById("gauge");
          const locationSelect = gaugeLocation.value;
@@ -430,6 +596,26 @@
     					} else {
         				map.setLayoutProperty('turbidityLayerPOR', 'visibility', 'none');
     					}
+    					if (dataTypeSelect === "discharge" && locationSelect == "LF") {
+    	 					map.setLayoutProperty('dischargeLayerLF', 'visibility', 'visible');
+    					} else {
+        				map.setLayoutProperty('dischargeLayerLF', 'visibility', 'none');
+    					}
+    					if (dataTypeSelect === "discharge" && locationSelect == "POR") {
+    	 					map.setLayoutProperty('dischargeLayerPOR', 'visibility', 'visible');
+    					} else {
+        				map.setLayoutProperty('dischargeLayerPOR', 'visibility', 'none');
+    					}
+    					if (dataTypeSelect === "level" && locationSelect == "LF") {
+    	 					map.setLayoutProperty('levelLayerLF', 'visibility', 'visible');
+    					} else {
+        				map.setLayoutProperty('levelLayerLF', 'visibility', 'none');
+    					}
+    					if (dataTypeSelect === "level" && locationSelect == "POR") {
+    	 					map.setLayoutProperty('levelLayerPOR', 'visibility', 'visible');
+    					} else {
+        				map.setLayoutProperty('levelLayerPOR', 'visibility', 'none');
+    					}
 				
 				document.getElementById('species').addEventListener('change', function(e) {
         const selectedValue = e.target.value;
@@ -441,10 +627,34 @@
         filterSpecies = ['==', ['string', ['get', 'Species']], selectedValue];
         };
             	
-        map.setFilter('tempLayerLF', ['all', ['!', ['has', 'point_count']], filterSpecies]);
-  			map.setFilter('turbidityLayerLF', ['all', ['!', ['has', 'point_count']], filterSpecies]);
-  			map.setFilter('tempLayerPOR', ['all', ['!', ['has', 'point_count']], filterSpecies]);
-  			map.setFilter('turbidityLayerPOR', ['all', ['!', ['has', 'point_count']], filterSpecies]);
+        map.setFilter('tempLayerLF', ['all', ['!', ['has', 'point_count']], filterSpecies, filterYear]);
+  			map.setFilter('turbidityLayerLF', ['all', ['!', ['has', 'point_count']], filterSpecies, filterYear]);
+  			map.setFilter('dischargeLayerLF', ['all', ['!', ['has', 'point_count']], filterSpecies, filterYear]);
+  			map.setFilter('levelLayerLF', ['all', ['!', ['has', 'point_count']], filterSpecies, filterYear]);
+  			map.setFilter('tempLayerPOR', ['all', ['!', ['has', 'point_count']], filterSpecies, filterYear]);
+  			map.setFilter('turbidityLayerPOR', ['all', ['!', ['has', 'point_count']], filterSpecies, filterYear]);
+  			map.setFilter('dischargeLayerPOR', ['all', ['!', ['has', 'point_count']], filterSpecies, filterYear]);
+  			map.setFilter('levelLayerPOR', ['all', ['!', ['has', 'point_count']], filterSpecies, filterYear]);
+       });  // end function
+       
+       document.getElementById('year').addEventListener('change', function(e) {
+        const selectedValue = e.target.value;
+        console.log("selected value = " + selectedValue);
+        if (selectedValue === 'All') {
+              filterYear = ['match', ['get', 'year'], ['2025', '2024','2023','2022','2021','2020'], true, false];
+            }
+        else {
+        filterYear = ['==', ['string', ['get', 'year']], selectedValue];
+        };
+            	
+        map.setFilter('tempLayerLF', ['all', ['!', ['has', 'point_count']], filterSpecies, filterYear]);
+  			map.setFilter('turbidityLayerLF', ['all', ['!', ['has', 'point_count']], filterSpecies, filterYear]);
+  			map.setFilter('dischargeLayerLF', ['all', ['!', ['has', 'point_count']], filterSpecies, filterYear]);
+  			map.setFilter('levelLayerLF', ['all', ['!', ['has', 'point_count']], filterSpecies, filterYear]);
+  			map.setFilter('tempLayerPOR', ['all', ['!', ['has', 'point_count']], filterSpecies, filterYear]);
+  			map.setFilter('turbidityLayerPOR', ['all', ['!', ['has', 'point_count']], filterSpecies, filterYear]);
+  			map.setFilter('dischargeLayerPOR', ['all', ['!', ['has', 'point_count']], filterSpecies, filterYear]);
+  			map.setFilter('levelLayerPOR', ['all', ['!', ['has', 'point_count']], filterSpecies, filterYear]);
        });  // end function
     
     
@@ -468,7 +678,7 @@
     	map.on('style.load', () => {
     		map.addSource('smallmouthSource',{
    							   type: 'geojson',
-   							   data: 'SmallmouthFULL.geojson',
+   							   data: 'SmallmouthFullDataset.geojson',
    							   cluster: true,
             			 clusterMaxZoom: 10, // Max zoom to cluster points on
             			 clusterRadius: 50
@@ -508,6 +718,18 @@
     		else if (whatIsDataType.value === "temp" && locationSelect == "POR") {
     	 		whatIsLayer = 'tempLayerPOR'
     		} 
+    		else if (whatIsDataType.value === "discharge" && locationSelect == "POR") {
+    	 		whatIsLayer = 'dischargeLayerPOR'
+    		} 
+    		else if (whatIsDataType.value === "discharge" && locationSelect == "LF") {
+    	 		whatIsLayer = 'dischargeLayerLF'
+    		} 
+    		else if (whatIsDataType.value === "level" && locationSelect == "POR") {
+    	 		whatIsLayer = 'levelLayerPOR'
+    		} 
+    		else if (whatIsDataType.value === "level" && locationSelect == "LF") {
+    	 		whatIsLayer = 'levelLayerLF'
+    		} 
     		else
     			whatIsLayer = 'tempLayerLF'
     		addAdditionalLayer();
@@ -529,6 +751,18 @@
     		else if (whatIsDataType.value === "temp" && locationSelect == "POR") {
     	 		whatIsLayer = 'tempLayerPOR'
     		} 
+    		else if (whatIsDataType.value === "discharge" && locationSelect == "POR") {
+    	 		whatIsLayer = 'dischargeLayerPOR'
+    		} 
+    		else if (whatIsDataType.value === "discharge" && locationSelect == "LF") {
+    	 		whatIsLayer = 'dischargeLayerLF'
+    		} 
+    		else if (whatIsDataType.value === "level" && locationSelect == "POR") {
+    	 		whatIsLayer = 'levelLayerPOR'
+    		} 
+    		else if (whatIsDataType.value === "level" && locationSelect == "LF") {
+    	 		whatIsLayer = 'levelLayerLF'
+    		} 
     		else
     			whatIsLayer = 'tempLayerLF'
     		addAdditionalLayer();
@@ -548,25 +782,46 @@
     					return;
         		} 
         		const feature = features[0];
-			  	
-			  		const popup = new mapboxgl.Popup({ offset: [0, -15] })
-				  	.setLngLat(feature.geometry.coordinates)
-				  	.setHTML(
-				  	  `<p>Smallmouth</p>
-				  	  <p>${feature.properties.PhotoDateTimeUTC}</p>
-				  	  <p>Tag Id:&nbsp;${feature.properties.ColorTag}&nbsp;${feature.properties.Alpha}&nbsp;${feature.properties.NumberTag}</p>
-				  	  <p>Little Falls Water Temp:  ${feature.properties.LF_WaterTemp2}&deg;F</p>
-				  	  <p>Point of Rocks Water Temp:  ${feature.properties.POR_WaterTemp2}&deg;F</p>
-				  	  <p>Little Falls Turbidity:  ${feature.properties.LF_Turbidity}&nbsp;</p>
-				  	  <p>Point of Rocks Turbidity:  ${feature.properties.POR_Turbidity}&nbsp;</p>
-				  	  <p>Little Falls River Level:  ${feature.properties.LF_RiverLevel}&nbsp;ft</p>
-				  	  <p>Little Falls Discharge:  ${feature.properties.LF_Discharge}&nbsp;cfs</p>
-				  	  <p>Point of Rocks Discharge:  ${feature.properties.POR_Discharge}&nbsp;cfs</p>
-				  	  <p>Notes:  ${feature.properties.PhotoNotes}&nbsp;</p>
-				  	  <p><a href="https://photos.app.goo.gl/cUSkSqatZouBjyLz6" target="_blank">Photo Link</a></p>`
-				  	  
-				  	)
-				  	.addTo(map);
+        		const locationSelect = gaugeLocation.value;
+        		
+        		
+        		
+        		if (locationSelect == "POR")
+        		{
+			  				const popup = new mapboxgl.Popup({ offset: [0, -15] })
+			  				
+				  			.setLngLat(feature.geometry.coordinates)
+				  			.setHTML(
+				  			  `<p>Smallmouth</p>
+				  			  <p>${feature.properties.PhotoDateTimeUTC}</p>
+				  			  <p>Tag Id:&nbsp;${feature.properties.ColorTag}&nbsp;${feature.properties.Alpha}&nbsp;${feature.properties.NumberTag}</p>
+				  			  <p>Point of Rocks Water Temp:  ${feature.properties.POR_WaterTempF}&deg;F</p>
+				  			  <p>Point of Rocks Turbidity:  ${feature.properties.POR_Turbidity}&nbsp;</p>
+				  			  <p>Point of Rocks River Level:  ${feature.properties.POR_RiverLevel}&nbsp;ft</p>
+				  			  <p>Point of Rocks Discharge:  ${feature.properties.POR_Discharge}&nbsp;cfs</p>
+				  			  <p>Notes:  ${feature.properties.PhotoNotes}&nbsp;</p>`
+				  			  
+				  			)
+				  			.addTo(map);
+				  		}
+				  		else
+				  			{
+			  				const popup = new mapboxgl.Popup({ offset: [0, -15] })
+			  				
+				  			.setLngLat(feature.geometry.coordinates)
+				  			.setHTML(
+				  			  `<p>Smallmouth</p>
+				  			  <p>${feature.properties.PhotoDateTimeUTC}</p>
+				  			  <p>Tag Id:&nbsp;${feature.properties.ColorTag}&nbsp;${feature.properties.Alpha}&nbsp;${feature.properties.NumberTag}</p>
+				  			  <p>Little Falls Water Temp:  ${feature.properties.LF_WaterTempF}&deg;F</p>
+				  			  <p>Little Falls Turbidity:  ${feature.properties.LF_Turbidity}&nbsp;</p>
+				  			  <p>Little Falls River Level:  ${feature.properties.LF_RiverLevel}&nbsp;ft</p>
+				  			  <p>Little Falls Discharge:  ${feature.properties.LF_Discharge}&nbsp;cfs</p>
+				  			  <p>Notes:  ${feature.properties.PhotoNotes}&nbsp;</p>`
+				  			  
+				  			)
+				  			.addTo(map);
+				  		}
       });
 
 
