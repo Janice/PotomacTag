@@ -67938,6 +67938,613 @@
         "type": "Point"
       },
       "id": "b9eef21750b0e48533cf818deb02e7f4"
+    },
+        {
+      "type": "Feature",
+      "properties": {
+        "SizeMm": 482.6,
+        "Notes": "",
+        "POR_WaterTemp_C": 4,
+        "POR_Turbidity_FNU": 5,
+        "POR_WaterTemp_F": 39.2,
+        "FileName": "PXL_20250225_183203308.PORTRAIT.jpg",
+        "LF_DissolvedOxygen_MG/L": 14.1,
+        "LF_Turbidity_FNU": 5.6,
+        "LF_WaterTemp_C": 4.8,
+        "POR_RiverLevel ft": 3.29,
+        "SizeInch": 19,
+        "LF_WaterTemp_F": 40.6,
+        "LF_Discharge_CFS": 10100,
+        "Date": "2/26/2025",
+        "POR_DissolvedOxygen_MG/L": 14.3,
+        "LF_RiverLevel_ft": 3.99,
+        "Recaptured": "Recaptured",
+        "NumberTag": "69",
+        "ColorTag": "Orange",
+        "PhotoDateTimeUTC": "feb 25, 2025. 1:42:00 PM",
+        "NamedSpot": "Stadging ",
+        "POR_Discharge _CFS": 8500,
+        "Species": "Smallmouth",
+        "year": "2025",
+        "Alpha": ""
+      },
+      "geometry": {
+        "coordinates": [
+          -77.313667,
+          39.056887
+        ],
+        "type": "Point"
+      },
+      "id": "246ae9982488c170e31d6851cbc3e82d"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "SizeMm": 355.6,
+        "Notes": "",
+        "POR_WaterTemp_C": 4.1,
+        "POR_Turbidity_FNU": 5,
+        "POR_WaterTemp_F": 39.4,
+        "FileName": "PXL_20250225_195259611.jpg",
+        "LF_DissolvedOxygen_MG/L": 14.1,
+        "LF_Turbidity_FNU": 5.6,
+        "LF_WaterTemp_C": 4.9,
+        "POR_RiverLevel ft": 3.25,
+        "SizeInch": 14,
+        "LF_WaterTemp_F": 40.8,
+        "LF_Discharge_CFS": 10000,
+        "Date": "2/26/2025",
+        "POR_DissolvedOxygen_MG/L": 14.3,
+        "LF_RiverLevel_ft": 3.85,
+        "Recaptured": "Tagged",
+        "NumberTag": "1680",
+        "ColorTag": "Orange",
+        "PhotoDateTimeUTC": "feb 25, 2025. 3:12:00 PM",
+        "NamedSpot": "Stadging ",
+        "POR_Discharge _CFS": 8400,
+        "Species": "Smallmouth",
+        "year": "2025",
+        "Alpha": "D"
+      },
+      "geometry": {
+        "coordinates": [
+          -77.313667,
+          39.056887
+        ],
+        "type": "Point"
+      },
+      "id": "2b7e5a316a3d8b9b97e0308d7a2e8fc9"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "SizeMm": 355.6,
+        "Notes": "14\"",
+        "POR_WaterTemp_C": 1.2,
+        "POR_Turbidity_FNU": 6.8,
+        "POR_WaterTemp_F": 34.2,
+        "FileName": "https://photos.app.goo.gl/jXXEKkUzJ52M3omo8",
+        "LF_DissolvedOxygen_MG/L": 12.3,
+        "LF_Turbidity_FNU": 17,
+        "LF_WaterTemp_C": 1.3,
+        "POR_RiverLevel ft": 4.2,
+        "SizeInch": 14,
+        "LF_WaterTemp_F": 34.3,
+        "LF_Discharge_CFS": 14600,
+        "Date": "2/21/2025",
+        "POR_DissolvedOxygen_MG/L": 12.6,
+        "LF_RiverLevel_ft": 4.54,
+        "Recaptured": "Tagged",
+        "NumberTag": "1865",
+        "ColorTag": "Purple",
+        "PhotoDateTimeUTC": "Feb 21, 2025. 4:59:00 PM",
+        "NamedSpot": "Brunswick",
+        "POR_Discharge _CFS": 10100,
+        "Species": "Smallmouth",
+        "year": "2025",
+        "Alpha": "E"
+      },
+      "geometry": {
+        "coordinates": [
+          -77.695789,
+          39.322461
+        ],
+        "type": "Point"
+      },
+      "id": "330356ecd905fe33a851e7886d7b40de"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "SizeMm": 330.2,
+        "Notes": "",
+        "POR_WaterTemp_C": 1.2,
+        "POR_Turbidity_FNU": 6.3,
+        "POR_WaterTemp_F": 34.2,
+        "FileName": "https://photos.app.goo.gl/PRnbK9bpzCjUiJP3A",
+        "LF_DissolvedOxygen_MG/L": 12.2,
+        "LF_Turbidity_FNU": 12.6,
+        "LF_WaterTemp_C": 1.8,
+        "POR_RiverLevel ft": 4.05,
+        "SizeInch": 13,
+        "LF_WaterTemp_F": 35.2,
+        "LF_Discharge_CFS": 14200,
+        "Date": "2/22/2025",
+        "POR_DissolvedOxygen_MG/L": 12.6,
+        "LF_RiverLevel_ft": 4.29,
+        "Recaptured": "Tagged",
+        "NumberTag": "1870",
+        "ColorTag": "Purple",
+        "PhotoDateTimeUTC": "Feb 22, 2025. 5:42:00 PM",
+        "NamedSpot": "Lander",
+        "POR_Discharge _CFS": 10300,
+        "Species": "Smallmouth",
+        "year": "2025",
+        "Alpha": "E"
+      },
+      "geometry": {
+        "coordinates": [
+          -77.640807,
+          39.310032
+        ],
+        "type": "Point"
+      },
+      "id": "522ee152a201e35ceb459c8476f1b46e"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "SizeMm": 330.2,
+        "Notes": "",
+        "POR_WaterTemp_C": 4.1,
+        "POR_Turbidity_FNU": 5,
+        "POR_WaterTemp_F": 39.4,
+        "FileName": "PXL_20250225_195044774.MP.jpg",
+        "LF_DissolvedOxygen_MG/L": 14.1,
+        "LF_Turbidity_FNU": 5.6,
+        "LF_WaterTemp_C": 4.9,
+        "POR_RiverLevel ft": 3.25,
+        "SizeInch": 13,
+        "LF_WaterTemp_F": 40.8,
+        "LF_Discharge_CFS": 10000,
+        "Date": "2/26/2025",
+        "POR_DissolvedOxygen_MG/L": 14.3,
+        "LF_RiverLevel_ft": 3.85,
+        "Recaptured": "Tagged",
+        "NumberTag": "1679",
+        "ColorTag": "Orange",
+        "PhotoDateTimeUTC": "feb 25, 2025. 3:02:00 PM",
+        "NamedSpot": "Stadging ",
+        "POR_Discharge _CFS": 8400,
+        "Species": "Smallmouth",
+        "year": "2025",
+        "Alpha": "D"
+      },
+      "geometry": {
+        "coordinates": [
+          -77.313667,
+          39.056887
+        ],
+        "type": "Point"
+      },
+      "id": "55fbc91ed69bc21e60cdfde1f57c6c41"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "SizeMm": 457.2,
+        "Notes": "",
+        "POR_WaterTemp_C": 1.2,
+        "POR_Turbidity_FNU": 6.5,
+        "POR_WaterTemp_F": 34.2,
+        "FileName": "https://photos.app.goo.gl/Apo6Mj8aF4HuytiM9",
+        "LF_DissolvedOxygen_MG/L": 12.2,
+        "LF_Turbidity_FNU": 12.6,
+        "LF_WaterTemp_C": 1.8,
+        "POR_RiverLevel ft": 4.08,
+        "SizeInch": 18,
+        "LF_WaterTemp_F": 35.2,
+        "LF_Discharge_CFS": 14200,
+        "Date": "2/22/2025",
+        "POR_DissolvedOxygen_MG/L": 12.6,
+        "LF_RiverLevel_ft": 4.38,
+        "Recaptured": "Tagged",
+        "NumberTag": 1866,
+        "ColorTag": "Purple",
+        "PhotoDateTimeUTC": "Feb 22, 2025. 1:49:00 PM",
+        "NamedSpot": "Lander",
+        "POR_Discharge _CFS": 9999,
+        "Species": "Smallmouth",
+        "year": "2025",
+        "Alpha": "E"
+      },
+      "geometry": {
+        "coordinates": [
+          -77.559519,
+          39.296195
+        ],
+        "type": "Point"
+      },
+      "id": "63b97149cd57b91190685995a64030be"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "SizeMm": 355.6,
+        "Notes": "",
+        "POR_WaterTemp_C": 1,
+        "POR_Turbidity_FNU": 6.3,
+        "POR_WaterTemp_F": 33.8,
+        "FileName": "https://photos.app.goo.gl/GWdmME1LZ3U8ZheBA",
+        "LF_DissolvedOxygen_MG/L": 12.2,
+        "LF_Turbidity_FNU": 12.6,
+        "LF_WaterTemp_C": 1.8,
+        "POR_RiverLevel ft": 4.06,
+        "SizeInch": 14,
+        "LF_WaterTemp_F": 35.2,
+        "LF_Discharge_CFS": 14200,
+        "Date": "2/22/2025",
+        "POR_DissolvedOxygen_MG/L": 12.6,
+        "LF_RiverLevel_ft": 4.3,
+        "Recaptured": "Tagged",
+        "NumberTag": "1869",
+        "ColorTag": "Purple",
+        "PhotoDateTimeUTC": "Feb 22, 2025. 4:01:00 PM",
+        "NamedSpot": "Brunswick",
+        "POR_Discharge _CFS": 10200,
+        "Species": "Smallmouth",
+        "year": "2025",
+        "Alpha": "E"
+      },
+      "geometry": {
+        "coordinates": [
+          -77.660642,
+          39.315847
+        ],
+        "type": "Point"
+      },
+      "id": "7ff5f66b6031a9896527a9d0e0a46dd9"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "SizeMm": 482.6,
+        "Notes": "",
+        "POR_WaterTemp_C": 4,
+        "POR_Turbidity_FNU": 5,
+        "POR_WaterTemp_F": 39.2,
+        "FileName": "PXL_20250225_190126738.jpg",
+        "LF_DissolvedOxygen_MG/L": 14.1,
+        "LF_Turbidity_FNU": 5.6,
+        "LF_WaterTemp_C": 4.8,
+        "POR_RiverLevel ft": 3.25,
+        "SizeInch": 19,
+        "LF_WaterTemp_F": 40.6,
+        "LF_Discharge_CFS": 10000,
+        "Date": "2/26/2025",
+        "POR_DissolvedOxygen_MG/L": 14.3,
+        "LF_RiverLevel_ft": 3.99,
+        "Recaptured": "Tagged",
+        "NumberTag": "1677",
+        "ColorTag": "Orange",
+        "PhotoDateTimeUTC": "feb 25, 2025. 2:42:00 PM",
+        "NamedSpot": "Stadging ",
+        "POR_Discharge _CFS": 8400,
+        "Species": "Smallmouth",
+        "year": "2025",
+        "Alpha": "D"
+      },
+      "geometry": {
+        "coordinates": [
+          -77.313667,
+          39.056887
+        ],
+        "type": "Point"
+      },
+      "id": "8f56f26bc10210a4a62242a4cc3521ed"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "SizeMm": 457.2,
+        "Notes": "",
+        "POR_WaterTemp_C": 4,
+        "POR_Turbidity_FNU": 5,
+        "POR_WaterTemp_F": 39.2,
+        "FileName": "PXL_20250225_182227375.MP.jpg",
+        "LF_DissolvedOxygen_MG/L": 14.1,
+        "LF_Turbidity_FNU": 5.6,
+        "LF_WaterTemp_C": 4.8,
+        "POR_RiverLevel ft": 3.29,
+        "SizeInch": 18,
+        "LF_WaterTemp_F": 40.6,
+        "LF_Discharge_CFS": 10100,
+        "Date": "2/26/2025",
+        "POR_DissolvedOxygen_MG/L": 14.3,
+        "LF_RiverLevel_ft": 4.01,
+        "Recaptured": "Tagged",
+        "NumberTag": "1664",
+        "ColorTag": "Orange",
+        "PhotoDateTimeUTC": "feb 25, 2025. 1:22:00 PM",
+        "NamedSpot": "Stadging ",
+        "POR_Discharge _CFS": 8500,
+        "Species": "Smallmouth",
+        "year": "2025",
+        "Alpha": "D"
+      },
+      "geometry": {
+        "coordinates": [
+          -77.313667,
+          39.056887
+        ],
+        "type": "Point"
+      },
+      "id": "8f675bb7c329a4d7da9f8c2cb543748f"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "SizeMm": 457.2,
+        "Notes": "",
+        "POR_WaterTemp_C": 1.2,
+        "POR_Turbidity_FNU": 6.4,
+        "POR_WaterTemp_F": 34.2,
+        "FileName": "https://photos.app.goo.gl/U5wHUYfhUiLnUYEN6",
+        "LF_DissolvedOxygen_MG/L": 12.2,
+        "LF_Turbidity_FNU": 12.6,
+        "LF_WaterTemp_C": 1.8,
+        "POR_RiverLevel ft": 4.07,
+        "SizeInch": 18,
+        "LF_WaterTemp_F": 35.2,
+        "LF_Discharge_CFS": 14200,
+        "Date": "2/22/2025",
+        "POR_DissolvedOxygen_MG/L": 12.6,
+        "LF_RiverLevel_ft": 4.35,
+        "Recaptured": "Tagged",
+        "NumberTag": "1868",
+        "ColorTag": "Purple",
+        "PhotoDateTimeUTC": "Feb 22, 2025. 4:00:00 PM",
+        "NamedSpot": "below Knoxville",
+        "POR_Discharge _CFS": 10100,
+        "Species": "Smallmouth",
+        "year": "2025",
+        "Alpha": "E"
+      },
+      "geometry": {
+        "coordinates": [
+          -77.661193,
+          39.316158
+        ],
+        "type": "Point"
+      },
+      "id": "97edc2d8511e859a44ccf0e119e6cd82"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "SizeMm": 431.8,
+        "Notes": "",
+        "POR_WaterTemp_C": 1,
+        "POR_Turbidity_FNU": 6.4,
+        "POR_WaterTemp_F": 33.8,
+        "FileName": "https://photos.app.goo.gl/Apo6Mj8aF4HuytiM9",
+        "LF_DissolvedOxygen_MG/L": 12.2,
+        "LF_Turbidity_FNU": 12.6,
+        "LF_WaterTemp_C": 1.8,
+        "POR_RiverLevel ft": 4.08,
+        "SizeInch": 17,
+        "LF_WaterTemp_F": 35.2,
+        "LF_Discharge_CFS": 14200,
+        "Date": "2/22/2025",
+        "POR_DissolvedOxygen_MG/L": 12.6,
+        "LF_RiverLevel_ft": 4.35,
+        "Recaptured": "Tagged",
+        "NumberTag": "1867",
+        "ColorTag": "Purple",
+        "PhotoDateTimeUTC": "Feb 22, 2025. 2:39:00 PM",
+        "NamedSpot": "Knoxville",
+        "POR_Discharge _CFS": 10000,
+        "Species": "Smallmouth",
+        "year": "2025",
+        "Alpha": "E"
+      },
+      "geometry": {
+        "coordinates": [
+          -77.615324,
+          39.305464
+        ],
+        "type": "Point"
+      },
+      "id": "c70060962457fb07c861d93198ebae01"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "SizeMm": 381,
+        "Notes": "",
+        "POR_WaterTemp_C": 4.1,
+        "POR_Turbidity_FNU": 5,
+        "POR_WaterTemp_F": 39.4,
+        "FileName": "PXL_20250225_194042512.MP.jpg",
+        "LF_DissolvedOxygen_MG/L": 14.1,
+        "LF_Turbidity_FNU": 5.6,
+        "LF_WaterTemp_C": 4.9,
+        "POR_RiverLevel ft": 3.25,
+        "SizeInch": 15,
+        "LF_WaterTemp_F": 40.8,
+        "LF_Discharge_CFS": 10000,
+        "Date": "2/26/2025",
+        "POR_DissolvedOxygen_MG/L": 14.3,
+        "LF_RiverLevel_ft": 3.99,
+        "Recaptured": "Tagged",
+        "NumberTag": "1678",
+        "ColorTag": "Orange",
+        "PhotoDateTimeUTC": "feb 25, 2025. 2:42:00 PM",
+        "NamedSpot": "Stadging ",
+        "POR_Discharge _CFS": 8400,
+        "Species": "Smallmouth",
+        "year": "2025",
+        "Alpha": "D"
+      },
+      "geometry": {
+        "coordinates": [
+          -77.313667,
+          39.056887
+        ],
+        "type": "Point"
+      },
+      "id": "ca384492f02d358400da25ce20c7e3d0"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "SizeMm": 406.4,
+        "POR_WaterTemp_C": 4.1,
+        "POR_Turbidity_FNU": 5,
+        "POR_WaterTemp_F": 39.4,
+        "FileName": "PXL_20250225_203305111.jpg",
+        "LF_DissolvedOxygen_MG/L": 14.1,
+        "LF_Turbidity_FNU": 5.6,
+        "LF_WaterTemp_C": 4.9,
+        "POR_RiverLevel ft": 3.25,
+        "SizeInch": 16,
+        "LF_WaterTemp_F": 40.8,
+        "LF_Discharge_CFS": 10000,
+        "Date": "2/26/2025",
+        "POR_DissolvedOxygen_MG/L": 14.3,
+        "LF_RiverLevel_ft": 3.85,
+        "Recaptured": "Tagged",
+        "NumberTag": "1682",
+        "ColorTag": "Orange",
+        "PhotoDateTimeUTC": "feb 25, 2025. 3:13:00 PM",
+        "NamedSpot": "Stadging ",
+        "POR_Discharge _CFS": 8400,
+        "Species": "Smallmouth",
+        "year": "2025",
+        "Alpha": "D"
+      },
+      "geometry": {
+        "coordinates": [
+          -77.313667,
+          39.056887
+        ],
+        "type": "Point"
+      },
+      "id": "df154e74328c23a90697a025caca5b86"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "SizeMm": 406.4,
+        "Notes": "",
+        "POR_WaterTemp_C": 4,
+        "POR_Turbidity_FNU": 5,
+        "POR_WaterTemp_F": 39.2,
+        "FileName": "PXL_20250225_183430537.MP.jpg",
+        "LF_DissolvedOxygen_MG/L": 14.1,
+        "LF_Turbidity_FNU": 5.6,
+        "LF_WaterTemp_C": 4.8,
+        "POR_RiverLevel ft": 3.29,
+        "SizeInch": 16,
+        "LF_WaterTemp_F": 40.6,
+        "LF_Discharge_CFS": 10100,
+        "Date": "2/26/2025",
+        "POR_DissolvedOxygen_MG/L": 14.3,
+        "LF_RiverLevel_ft": 3.99,
+        "Recaptured": "",
+        "NumberTag": "Not Tagged",
+        "ColorTag": "",
+        "PhotoDateTimeUTC": "feb 25, 2025. 1:52:00 PM",
+        "NamedSpot": "Stadging ",
+        "POR_Discharge _CFS": 8500,
+        "Species": "Smallmouth",
+        "year": "2025",
+        "Alpha": ""
+      },
+      "geometry": {
+        "coordinates": [
+          -77.313667,
+          39.056887
+        ],
+        "type": "Point"
+      },
+      "id": "e2727cb4d79bab7e2b9d1416bbb66bca"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "SizeMm": 304.8,
+        "Notes": "",
+        "POR_WaterTemp_C": 4,
+        "POR_Turbidity_FNU": 5,
+        "POR_WaterTemp_F": 39.2,
+        "FileName": "PXL_20250225_184451046.jpg",
+        "LF_DissolvedOxygen_MG/L": 14.1,
+        "LF_Turbidity_FNU": 5.6,
+        "LF_WaterTemp_C": 4.8,
+        "POR_RiverLevel ft": 3.29,
+        "SizeInch": 12,
+        "LF_WaterTemp_F": 40.6,
+        "LF_Discharge_CFS": 10100,
+        "Date": "2/26/2025",
+        "POR_DissolvedOxygen_MG/L": 14.3,
+        "LF_RiverLevel_ft": 3.99,
+        "Recaptured": "Tagged",
+        "NumberTag": "1672",
+        "ColorTag": "Orange",
+        "PhotoDateTimeUTC": "feb 25, 2025. 2:12:00 PM",
+        "NamedSpot": "Stadging ",
+        "POR_Discharge _CFS": 8500,
+        "Species": "Smallmouth",
+        "year": "2025",
+        "Alpha": "D"
+      },
+      "geometry": {
+        "coordinates": [
+          -77.313667,
+          39.056887
+        ],
+        "type": "Point"
+      },
+      "id": "e3b6da61b3a6720bcd9102ad07356e11"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "SizeMm": 304.8,
+        "Notes": "",
+        "POR_WaterTemp_C": 4,
+        "POR_Turbidity_FNU": 5,
+        "POR_WaterTemp_F": 39.2,
+        "FileName": "PXL_20250225_185413438.jpg",
+        "LF_DissolvedOxygen_MG/L": 14.1,
+        "LF_Turbidity_FNU": 5.6,
+        "LF_WaterTemp_C": 4.8,
+        "POR_RiverLevel ft": 3.29,
+        "SizeInch": 12,
+        "LF_WaterTemp_F": 40.6,
+        "LF_Discharge_CFS": 10100,
+        "Date": "2/26/2025",
+        "POR_DissolvedOxygen_MG/L": 14.3,
+        "LF_RiverLevel_ft": 3.99,
+        "Recaptured": "Tagged",
+        "NumberTag": "1673",
+        "ColorTag": "Orange",
+        "PhotoDateTimeUTC": "feb 25, 2025. 2:22:00 PM",
+        "NamedSpot": "Stadging ",
+        "POR_Discharge _CFS": 8500,
+        "Species": "Smallmouth",
+        "year": "2025",
+        "Alpha": "D"
+      },
+      "geometry": {
+        "coordinates": [
+          -77.313667,
+          39.056887
+        ],
+        "type": "Point"
+      },
+      "id": "ea72bd4675c4b5ee27b8f7c5af4d460c"
     }
   ],
   "type": "FeatureCollection"
