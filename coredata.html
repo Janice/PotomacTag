@@ -724,6 +724,18 @@
         	addAdditionalLayer();
     	});
     	
+    	// Add geolocate control to the map.
+    	map.addControl(
+        	new mapboxgl.GeolocateControl({
+            	positionOptions: {
+                enableHighAccuracy: true
+            	},
+            // When active the map will receive updates to the device's location as it changes.
+            	trackUserLocation: true,
+            // Draw an arrow next to the location dot to indicate which direction the device is heading.
+            	showUserHeading: true
+        	})
+    		);
     	
     	
     	
@@ -832,7 +844,7 @@
 				  			.setHTML(
 				  			  `<p>${feature.properties.Species}</p>
 				  			  <p>${feature.properties.PhotoDateTimeUTC}</p>
-				  			  <p>Tag Id:&nbsp;${feature.properties.ColorTag}&nbsp;${feature.properties.Alpha}&nbsp;${feature.properties.NumberTag}</p>
+				  			  <p>Tag Id:&nbsp;${feature.properties.Recaptured}&nbsp;${feature.properties.ColorTag}&nbsp;${feature.properties.Alpha}&nbsp;${feature.properties.NumberTag}</p>
 				  			  <p>Point of Rocks Water Temp:  ${feature.properties.POR_WaterTemp_F}&deg;F</p>
 				  			  <p>Point of Rocks Turbidity:  ${feature.properties.POR_Turbidity_FNU}&nbsp;</p>
 				  			  <p>Point of Rocks River Level:  ${feature.properties.POR_RiverLevel_ft}&nbsp;ft</p>
@@ -850,7 +862,7 @@
 				  			.setHTML(
 				  			  `<p>${feature.properties.Species}</p>
 				  			  <p>${feature.properties.PhotoDateTimeUTC}</p>
-				  			  <p>Tag Id:&nbsp;${feature.properties.ColorTag}&nbsp;${feature.properties.Alpha}&nbsp;${feature.properties.NumberTag}</p>
+				  			  <p>Tag Id:&nbsp;${feature.properties.Recaptured}&nbsp;${feature.properties.ColorTag}&nbsp;${feature.properties.Alpha}&nbsp;${feature.properties.NumberTag}</p>
 				  			  <p>Little Falls Water Temp:  ${feature.properties.LF_WaterTemp_F}&deg;F</p>
 				  			  <p>Little Falls Turbidity:  ${feature.properties.LF_Turbidity_FNU}&nbsp;</p>
 				  			  <p>Little Falls River Level:  ${feature.properties.LF_RiverLevel_ft}&nbsp;ft</p>
